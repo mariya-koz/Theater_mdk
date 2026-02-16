@@ -1,7 +1,11 @@
+using Microsoft.EntityFrameworkCore;
+using Theater_mdk.Data;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddRazorPages();
+builder.Services.AddDbContext<ApplicationDBContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("Theater_mdk")));
 
 var app = builder.Build();
 
