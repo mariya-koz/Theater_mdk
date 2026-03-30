@@ -12,7 +12,8 @@ namespace Theater_mdk.Data
             //Database.Migrate();
         }
 
-        public DbSet<Ticket> Books { get; set; }
-        public DbSet<Audience> Students { get; set; }
+        public DbSet<Ticket> Ticket { get; set; }
+        public DbSet<Audience> Audiences { get; set; }
+
     }
 }

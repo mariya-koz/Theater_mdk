@@ -1,0 +1,60 @@
+﻿@page
+@model Theater_mdk.Pages.Tickets.IndexModel
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-page="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Title)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].TimeMin)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].DataShow)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Price)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Ticket[0].Name)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model.Ticket) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.TimeMin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DataShow)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Price)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <a asp-page="./Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-page="./Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-page="./Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
