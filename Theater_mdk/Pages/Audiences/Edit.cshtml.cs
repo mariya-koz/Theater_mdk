@@ -1,77 +1,49 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
 using Theater_mdk.Data;
 using Theater_mdk.Models;
 
 namespace Theater_mdk.Pages.Audiences
 {
+    [Authorize]
     public class EditModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public EditModel(Theater_mdk.Data.ApplicationDBContext context)
+        public EditModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Audience Audience { get; set; } = default!;
+        public Audience Audience { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
-                return NotFound();
-            }
+            Audience = _context.Audiences.Find(id);
 
-            var audience =  await _context.Audiences.FirstOrDefaultAsync(m => m.Id == id);
-            if (audience == null)
-            {
+            if (Audience == null)
                 return NotFound();
-            }
-            Audience = audience;
+
             return Page();
         }
 
-        // To protect from overposting attacks, enable the specific properties you want to bind to.
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
-            _context.Attach(Audience).State = EntityState.Modified;
+            _context.Audiences.Update(Audience);
+            _context.SaveChanges();
 
-            try
-            {
-                await _context.SaveChangesAsync();
-            }
-            catch (DbUpdateConcurrencyException)
-            {
-                if (!AudienceExists(Audience.Id))
-                {
-                    return NotFound();
-                }
-                else
-                {
-                    throw;
-                }
-            }
-
-            return RedirectToPage("./Index");
-        }
-
-        private bool AudienceExists(int id)
-        {
-            return _context.Audiences.Any(e => e.Id == id);
+            return RedirectToPage("Index");
         }
     }
 }

@@ -12,32 +12,23 @@ namespace Theater_mdk.Pages.Audiences
 {
     public class DetailsModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public DetailsModel(Theater_mdk.Data.ApplicationDBContext context)
+        public DetailsModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        public Audience Audience { get; set; } = default!;
+        public Audience Student { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
+            Student = _context.Audiences.FirstOrDefault(s => s.Id == id);
+
+            if (Student == null)
                 return NotFound();
-            }
 
-            var audience = await _context.Audiences.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (audience is not null)
-            {
-                Audience = audience;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
     }
 }

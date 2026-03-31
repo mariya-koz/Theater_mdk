@@ -12,18 +12,17 @@ namespace Theater_mdk.Pages.Tickets
 {
     public class IndexModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public IndexModel(Theater_mdk.Data.ApplicationDBContext context)
+        public IndexModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        public IList<Ticket> Ticket { get;set; } = default!;
-
-        public async Task OnGetAsync()
+        public List<Ticket> Tickets { get; set; }
+        public void OnGet()
         {
-            Ticket = await _context.Ticket.ToListAsync();
+            Tickets = _context.Ticket.ToList();
         }
     }
 }

@@ -14,25 +14,25 @@
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Title)
+                @Html.DisplayNameFor(model => model.Tickets[0].Title)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].TimeMin)
+                @Html.DisplayNameFor(model => model.Tickets[0].TimeMin)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].DataShow)
+                @Html.DisplayNameFor(model => model.Tickets[0].DataShow)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Price)
+                @Html.DisplayNameFor(model => model.Tickets[0].Price)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.Ticket[0].Name)
+                @Html.DisplayNameFor(model => model.Tickets[0].Name)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model.Ticket) {
+@foreach (var item in Model.Tickets) {
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.Title)
