@@ -23,7 +23,7 @@
                         <input type="hidden" asp-for="Ticket.Id" />
 
                         <div class="mb-3">
-                            <label asp-for="Ticket.Title" class="form-label">Название</label>
+                            <label asp-for="Ticket.Title" class="form-label">Название пьесы</label>
                             <input asp-for="Ticket.Title" class="form-control" />
                             <span asp-validation-for="Ticket.Title" class="text-danger"></span>
                         </div>
@@ -34,17 +34,17 @@
                         </div> *@
 
                         <div class="mb-3">
-                            <label asp-for="Ticket.TimeMin" class="form-label">Автор</label>
+                            <label asp-for="Ticket.TimeMin" class="form-label">длительность (в минутах)</label>
                             <input asp-for="Ticket.TimeMin" class="form-control" />
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Ticket.DataShow" class="form-label">Год</label>
+                            <label asp-for="Ticket.DataShow" class="form-label">Дата показа</label>
                             <input asp-for="Ticket.DataShow" type="number" class="form-control" />
                         </div>
 
                         <div class="mb-3">
-                            <label asp-for="Ticket.Price" class="form-label">Количество</label>
+                            <label asp-for="Ticket.Price" class="form-label">Цена</label>
                             <input asp-for="Ticket.Price" type="number" class="form-control" />
                         </div>
 

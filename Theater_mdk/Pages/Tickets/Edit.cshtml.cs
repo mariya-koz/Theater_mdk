@@ -15,13 +15,11 @@ namespace Theater_mdk.Pages.Tickets
     public class EditModel : PageModel
     {
         private readonly ApplicationDBContext _context;
-       // private readonly IHubContext<TicketHub> _hubContext;
 
-        //public EditModel(ApplicationDBContext context, IHubContext<BookHub> hubContext)
-        //{
-        //    _context = context;
-        //    _hubContext = hubContext;
-        //}
+        public EditModel(ApplicationDBContext context)
+        {
+            _context = context;
+        }
 
         [BindProperty]
         public Ticket? Ticket { get; set; }
