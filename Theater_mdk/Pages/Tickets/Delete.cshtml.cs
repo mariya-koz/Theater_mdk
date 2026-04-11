@@ -12,51 +12,37 @@ namespace Theater_mdk.Pages.Tickets
 {
     public class DeleteModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public DeleteModel(Theater_mdk.Data.ApplicationDBContext context)
+        public DeleteModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
         [BindProperty]
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket? Ticket { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
+            Ticket = _context.Ticket.FirstOrDefault(s => s.Id == id);  
+
+            if (Ticket == null)
                 return NotFound();
-            }
 
-            var ticket = await _context.Ticket.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (ticket is not null)
-            {
-                Ticket = ticket;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
 
-        public async Task<IActionResult> OnPostAsync(int? id)
+        public IActionResult OnPost()
         {
-            if (id == null)
+            var book = _context.Ticket.Find(Ticket.Id);
+
+            if (book != null)
             {
-                return NotFound();
+                _context.Ticket.Remove(book);
+                _context.SaveChanges();
             }
 
-            var ticket = await _context.Ticket.FindAsync(id);
-            if (ticket != null)
-            {
-                Ticket = ticket;
-                _context.Ticket.Remove(Ticket);
-                await _context.SaveChangesAsync();
-            }
-
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }

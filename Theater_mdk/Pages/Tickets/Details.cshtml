@@ -5,45 +5,70 @@
     ViewData["Title"] = "Details";
 }
 
-<h1>Details</h1>
+<div class="container mt-4">
 
-<div>
-    <h4>Ticket</h4>
-    <hr />
-    <dl class="row">
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.Title)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.Title)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.TimeMin)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.TimeMin)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.DataShow)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.DataShow)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.Price)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.Price)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.Ticket.Name)
-        </dt>
-        <dd class="col-sm-10">
-            @Html.DisplayFor(model => model.Ticket.Name)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-page="./Edit" asp-route-id="@Model.Ticket.Id">Edit</a> |
-    <a asp-page="./Index">Back to List</a>
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Информация о книге</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="card-title mb-3">
+                        📚 @Model.Ticket.Title
+                    </h5>
+
+                    <ul class="list-group list-group-flush mb-3">
+
+                        @* <li class="list-group-item">
+                            <strong>Автор:</strong>
+                            <span class="text-muted">@Model.Ticket.Seat</span>
+                        </li> *@
+
+                        <li class="list-group-item">
+                            <strong>Автор:</strong>
+                            <span class="text-muted">@Model.Ticket.TimeMin</span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Год:</strong>
+                            <span class="badge bg-secondary">
+                                @Model.Ticket.DataShow
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Экземпляров:</strong>
+                            <span class="badge bg-info">
+                                @Model.Ticket.Price
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-page="Index" class="btn btn-secondary">
+                            Назад
+                        </a>
+
+                        <a asp-page="Edit"
+                           asp-route-id="@Model.Ticket.Id"
+                           class="btn btn-warning">
+                            Редактировать
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
 </div>

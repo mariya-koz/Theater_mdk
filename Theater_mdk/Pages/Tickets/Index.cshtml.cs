@@ -19,10 +19,11 @@ namespace Theater_mdk.Pages.Tickets
             _context = context;
         }
 
-        public List<Ticket> Tickets { get; set; }
+        public List<Ticket> Ticket { get; set; }
+
         public void OnGet()
         {
-            Tickets = _context.Ticket.ToList();
+            Ticket = _context.Ticket.ToList();
         }
     }
 }

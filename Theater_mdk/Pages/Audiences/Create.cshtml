@@ -5,55 +5,52 @@
     ViewData["Title"] = "Create";
          }
         
-        <h1>Create</h1>
-        
-    <h4>Audience</h4>
-    <hr />
-    <div class="row">
-    <div class="col-md-4">
-    <form method="post">
-    <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-group">
-                <label asp-for="Audience.LastName" class="control-label"></label>
-                <input asp-for="Audience.LastName" class="form-control" />
-                <span asp-validation-for="Audience.LastName" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Audience.Passport" class="control-label"></label>
-                <input asp-for="Audience.Passport" class="form-control" />
-                <span asp-validation-for="Audience.Passport" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Audience.Email" class="control-label"></label>
-                <input asp-for="Audience.Email" class="form-control" />
-                <span asp-validation-for="Audience.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Audience.Phone" class="control-label"></label>
-                <input asp-for="Audience.Phone" class="form-control" />
-                <span asp-validation-for="Audience.Phone" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Audience.BirthDate" class="control-label"></label>
-                <input asp-for="Audience.BirthDate" class="form-control" />
-                <span asp-validation-for="Audience.BirthDate" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="Audience.Name" class="control-label"></label>
-                <input asp-for="Audience.Name" class="form-control" />
-                <span asp-validation-for="Audience.Name" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Create" class="btn btn-primary" />
+<h1 class="mb-4">Добавить зрителя</h1>
+
+<div class="row">
+    <div class="col-md-6">
+        <form method="post">
+            <div class="card shadow-sm">
+                <div class="card-body">
+                    <div class="mb-3">
+                        <label asp-for="Audience.LastName" class="form-label"></label>
+                        <input asp-for="Audience.LastName" class="form-control" />
+                        <span asp-validation-for="Audience.LastName" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Audience.Email" class="form-label"></label>
+                        <input asp-for="Audience.Email" class="form-control" />
+                        <span asp-validation-for="Audience.Email" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Audience.Phone" class="form-label"></label>
+                        <input asp-for="Audience.Phone" class="form-control" />
+                        <span asp-validation-for="Audience.Phone" class="text-danger"></span>
+                    </div>
+
+                    <div class="mb-3">
+                        <label asp-for="Audience.BirthDate" class="form-label"></label>
+                        <input asp-for="Audience.BirthDate" type="date" class="form-control" />
+                        <span asp-validation-for="Audience.BirthDate" class="text-danger"></span>
+                    </div>
+
+                    <div class="d-flex gap-2">
+                        <button type="submit" class="btn btn-primary">
+                            Сохранить
+                        </button>
+
+                        <a asp-page="Index" class="btn btn-secondary">
+                            Назад
+                        </a>
+                    </div>
+                </div>
             </div>
         </form>
     </div>
 </div>
 
-<div>
-    <a asp-page="Index">Back to List</a>
-</div>
-
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    <partial name="_ValidationScriptsPartial" />
 }

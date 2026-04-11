@@ -12,32 +12,25 @@ namespace Theater_mdk.Pages.Tickets
 {
     public class DetailsModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public DetailsModel(Theater_mdk.Data.ApplicationDBContext context)
+        public DetailsModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket? Ticket { get; set; }
 
-        public async Task<IActionResult> OnGetAsync(int? id)
+        public IActionResult OnGet(int id)
         {
-            if (id == null)
-            {
+            Ticket = _context.Ticket
+                        .Where(c => c.Id == id)
+                        .FirstOrDefault();
+
+            if (Ticket == null)
                 return NotFound();
-            }
 
-            var ticket = await _context.Ticket.FirstOrDefaultAsync(m => m.Id == id);
-
-            if (ticket is not null)
-            {
-                Ticket = ticket;
-
-                return Page();
-            }
-
-            return NotFound();
+            return Page();
         }
     }
 }

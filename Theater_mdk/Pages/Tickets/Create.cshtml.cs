@@ -12,33 +12,27 @@ namespace Theater_mdk.Pages.Tickets
 {
     public class CreateModel : PageModel
     {
-        private readonly Theater_mdk.Data.ApplicationDBContext _context;
+        private readonly ApplicationDBContext _context;
 
-        public CreateModel(Theater_mdk.Data.ApplicationDBContext context)
+        public CreateModel(ApplicationDBContext context)
         {
             _context = context;
         }
 
-        public IActionResult OnGet()
-        {
-            return Page();
-        }
-
         [BindProperty]
-        public Ticket Ticket { get; set; } = default!;
+        public Ticket Ticket { get; set; }
 
-        // For more information, see https://aka.ms/RazorPagesCRUD.
-        public async Task<IActionResult> OnPostAsync()
+        public void OnGet() { }
+
+        public IActionResult OnPost()
         {
             if (!ModelState.IsValid)
-            {
                 return Page();
-            }
 
             _context.Ticket.Add(Ticket);
-            await _context.SaveChangesAsync();
+            _context.SaveChanges();
 
-            return RedirectToPage("./Index");
+            return RedirectToPage("Index");
         }
     }
 }
