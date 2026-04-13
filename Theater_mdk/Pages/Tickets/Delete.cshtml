@@ -1,0 +1,72 @@
+﻿@page
+@model Theater_mdk.Pages.Tickets.DeleteModel
+
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card border-danger shadow-sm">
+
+                <div class="card-header bg-danger text-white">
+                    <h4 class="mb-0">Удалить книгу</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <div class="alert alert-warning">
+                        Вы уверены, что хотите удалить эту книгу?
+                    </div>
+
+                    <div class="mb-3">
+
+                        <h5 class="card-title">@Model.Ticket.Title</h5>
+
+                        @* <p class="card-text text-muted">
+                            Автор: @Model.Ticket.Seat
+                        </p> *@
+
+                        <p class="card-text">
+                            Год: <span class="badge bg-secondary">@Model.Ticket.TimeMin</span>
+                        </p>
+
+                        <p class="card-text">
+                            Экземпляров: <span class="badge bg-info">@Model.Ticket.DataShow</span>
+                        </p>
+
+                        <p class="card-text">
+                            Экземпляров: <span class="badge bg-info">@Model.Ticket.Price</span>
+                        </p>
+
+                    </div>
+
+                    <form method="post">
+
+                        <input type="hidden" asp-for="Ticket.Id" />
+
+                        <div class="d-flex justify-content-between">
+
+                            <a asp-page="Index" class="btn btn-secondary">
+                                Отмена
+                            </a>
+
+                            <button type="submit" class="btn btn-danger">
+                                Удалить
+                            </button>
+
+                        </div>
+
+                    </form>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>

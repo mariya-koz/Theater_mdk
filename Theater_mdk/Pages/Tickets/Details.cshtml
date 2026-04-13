@@ -1,0 +1,74 @@
+﻿@page "{id:int}"
+@model Theater_mdk.Pages.Tickets.DetailsModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+<div class="container mt-4">
+
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-5">
+
+            <div class="card shadow-sm">
+
+                <div class="card-header bg-primary text-white">
+                    <h4 class="mb-0">Информация о книге</h4>
+                </div>
+
+                <div class="card-body">
+
+                    <h5 class="card-title mb-3">
+                        📚 @Model.Ticket.Title
+                    </h5>
+
+                    <ul class="list-group list-group-flush mb-3">
+
+                        @* <li class="list-group-item">
+                            <strong>Автор:</strong>
+                            <span class="text-muted">@Model.Ticket.Seat</span>
+                        </li> *@
+
+                        <li class="list-group-item">
+                            <strong>Автор:</strong>
+                            <span class="text-muted">@Model.Ticket.TimeMin</span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Год:</strong>
+                            <span class="badge bg-secondary">
+                                @Model.Ticket.DataShow
+                            </span>
+                        </li>
+
+                        <li class="list-group-item">
+                            <strong>Экземпляров:</strong>
+                            <span class="badge bg-info">
+                                @Model.Ticket.Price
+                            </span>
+                        </li>
+
+                    </ul>
+
+                    <div class="d-flex justify-content-between">
+
+                        <a asp-page="Index" class="btn btn-secondary">
+                            Назад
+                        </a>
+
+                        <a asp-page="Edit"
+                           asp-route-id="@Model.Ticket.Id"
+                           class="btn btn-warning">
+                            Редактировать
+                        </a>
+
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+</div>
