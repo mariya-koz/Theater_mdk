@@ -13,13 +13,13 @@
             <div class="card border-danger shadow-sm">
 
                 <div class="card-header bg-danger text-white">
-                    <h4 class="mb-0">Удалить книгу</h4>
+                    <h4 class="mb-0">Удалить билет</h4>
                 </div>
 
                 <div class="card-body">
 
                     <div class="alert alert-warning">
-                        Вы уверены, что хотите удалить эту книгу?
+                        Вы уверены, что хотите удалить этот билет?
                     </div>
 
                     <div class="mb-3">
@@ -31,15 +31,15 @@
                         </p> *@
 
                         <p class="card-text">
-                            Год: <span class="badge bg-secondary">@Model.Ticket.TimeMin</span>
+                            Время (в минутах): <span class="badge bg-secondary">@Model.Ticket.TimeMin</span>
                         </p>
 
                         <p class="card-text">
-                            Экземпляров: <span class="badge bg-info">@Model.Ticket.DataShow</span>
+                            Дата показа: <span class="badge bg-info">@Model.Ticket.DataShow</span>
                         </p>
 
                         <p class="card-text">
-                            Экземпляров: <span class="badge bg-info">@Model.Ticket.Price</span>
+                            Цена: <span class="badge bg-info">@Model.Ticket.Price</span>
                         </p>
 
                     </div>
