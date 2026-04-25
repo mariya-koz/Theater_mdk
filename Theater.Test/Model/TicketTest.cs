@@ -8,33 +8,76 @@ using System.Threading.Tasks;
 
 namespace Theater.Test.Model
 {
-    internal class TicketTest
+    public class TicketTests
     {
         [Fact]
         public void Book_WithValidData_ShouldBeValid()
         {
-            // Создаем объект книги с валидными значениями.
-            var book = new Ticket
+            // Arrange
+            var ticket = new Ticket
             {
-                Name = "C# in Depth",     // Обязательное поле, строка < 100 символов
-                Author = new Author { Name = "Пушкин" },      // Обязательное поле, строка < 100 символов
-                Year = 2020,               // В пределах допустимого диапазона 1000–2100
+                Title = "C# in Depth",           // Обязательное поле, строка < 100 символов
+                TimeMin = 120, // Обязательное поле
+                DataShow = new DateTime(2001, 02, 20),                     // В пределах 1000–2100
+                Price = 1000,                    // Предположим, это сумма
             };
 
-            // Создаем контекст валидации на основе объекта
-            var context = new ValidationContext(book);
+            // Act
+            var context = new ValidationContext(ticket);
+            var results = new List<ValidationResult>();
+            var isValid = Validator.TryValidateObject(ticket, context, results, true);
 
-            // Сюда будут записаны ошибки валидации, если они есть
-            var result = new List<ValidationResult>();
-
-            // Проводим валидацию объекта с учетом всех атрибутов [Required], [Range] и т.п.
-            var isValid = Validator.TryValidateObject(book, context, result, true);
-
-            // Ожидаем, что валидация прошла успешно (все поля корректны)
+            // Assert
             Assert.True(isValid);
-
-            // Также убеждаемся, что список ошибок пуст
-            Assert.Empty(result);
+            Assert.Empty(results);
         }
+
+        [Fact]
+        public void Book_WithInvalidYear_ShouldBeInvalid()
+        {
+            // Arrange
+            var ticket = new Ticket
+            {
+                Title = "Test Book",
+                TimeMin = 312, // Обязательное поле
+                DataShow = new DateTime (2001,02,20),                     // В пределах 1000–2100
+                Price = 1000,                    // Предположим, это сумма
+            };
+
+            var context = new ValidationContext(ticket);
+            var results = new List<ValidationResult>();
+
+            // Act
+            var isValid = Validator.TryValidateObject(ticket, context, results, true);
+
+            // Assert
+            Assert.False(isValid);
+            Assert.Contains(results, r => r.ErrorMessage != null &&
+                                         r.ErrorMessage.Contains("Год должен быть"));
+        }
+    }
+
+    // Пример классов с атрибутами валидации
+    public class Ticket
+    {
+        [Required(ErrorMessage = "Название обязательно")]
+        [StringLength(100, ErrorMessage = "Название не должно превышать 100 символов")]
+        public string Title { get; set; }
+
+        [Range(60, 300, ErrorMessage = "Год должен быть между 1000 и 2100")]
+        public int TimeMin { get; set; }
+
+        [Range(1000, 2100, ErrorMessage = "Год должен быть между 1000 и 2100")]
+        public DateTime DataShow { get; set; }
+
+        [Range(0, 1000000, ErrorMessage = "Цена должна быть положительной")]
+        public double Price { get; set; }
+    }
+
+    public class Viewer
+    {
+        [Required(ErrorMessage = "Имя Зрителя обязательно")]
+        [StringLength(100)]
+        public string Name { get; set; }
     }
 }
