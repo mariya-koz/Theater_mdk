@@ -20,9 +20,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="9.0.12" />
   </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Theater.Test\Theater.Test.csproj" />
-  </ItemGroup>
-
 
 </Project>

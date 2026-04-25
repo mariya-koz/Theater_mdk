@@ -1,4 +1,4 @@
-﻿namespace Theater.Test
+﻿namespace Theater_mdk.Test
 {
     public class UnitTest1
     {
