@@ -1,12 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using Theater_mdk.Data;
-using Theater_mdk.Models;
+using Theater_mdk.Models.AuthApp;
 
-namespace Theater_mdk.Pages.Audiences
+namespace Theater_mdk.Pages.Account.Users
 {
     [Authorize]
+
     public class IndexModel : PageModel
     {
         private readonly ApplicationDBContext _context;
@@ -16,11 +18,11 @@ namespace Theater_mdk.Pages.Audiences
             _context = context;
         }
 
-        public List<Audience> Audiences { get; set; }
+        public IList<AuthUser> Users { get; set; }
 
-        public void OnGet()
+        public async Task OnGetAsync()
         {
-            Audiences = _context.Audiences.ToList();
+            Users = await _context.AuthUser.ToListAsync();
         }
     }
 }

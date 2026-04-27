@@ -11,6 +11,7 @@ using Theater_mdk.Models;
 
 namespace Theater_mdk.Pages.Audiences
 {
+    [Authorize]
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDBContext _context;
