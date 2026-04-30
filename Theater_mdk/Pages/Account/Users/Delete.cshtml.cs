@@ -19,7 +19,7 @@ namespace Theater_mdk.Pages.Account.Users
 
         public async Task<IActionResult> OnGetAsync(int id)
         {
-            User = await _context.AuthUser.FindAsync(id);
+            User = await _context.AuthUsers.FindAsync(id);
 
             if (User == null)
                 return NotFound();
@@ -29,11 +29,11 @@ namespace Theater_mdk.Pages.Account.Users
 
         public async Task<IActionResult> OnPostAsync()
         {
-            var user = await _context.AuthUser.FindAsync(User.Id);
+            var user = await _context.AuthUsers.FindAsync(User.Id);
 
             if (user != null)
             {
-                _context.AuthUser.Remove(user);
+                _context.AuthUsers.Remove(user);
                 await _context.SaveChangesAsync();
             }
 

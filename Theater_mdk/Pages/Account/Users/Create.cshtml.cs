@@ -23,7 +23,7 @@ namespace Theater_mdk.Pages.Account.Users
             if (!ModelState.IsValid)
                 return Page();
 
-            _context.AuthUser.Add(User);
+            _context.AuthUsers.Add(User);
             await _context.SaveChangesAsync();
 
             return RedirectToPage("Index");

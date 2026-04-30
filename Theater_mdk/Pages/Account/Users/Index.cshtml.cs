@@ -22,7 +22,7 @@ namespace Theater_mdk.Pages.Account.Users
 
         public async Task OnGetAsync()
         {
-            Users = await _context.AuthUser.ToListAsync();
+            Users = await _context.AuthUsers.ToListAsync();
         }
     }
 }

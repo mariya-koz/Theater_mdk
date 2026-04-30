@@ -15,7 +15,7 @@ namespace Theater_mdk.Data
 
         public DbSet<Ticket> Ticket { get; set; }
         public DbSet<Audience> Audiences { get; set; }
-        public DbSet<AuthUser> AuthUser { get; set; }
+        public DbSet<AuthUser> AuthUsers { get; set; }
 
     }
 }

@@ -28,7 +28,7 @@ namespace Theater_mdk.Pages.Account
             if (!ModelState.IsValid)
                 return Page();
 
-            var user = _context.AuthUser.FirstOrDefault(u => u.Email == Input.Email && u.Password == Input.Password);
+            var user = _context.AuthUsers.FirstOrDefault(u => u.Email == Input.Email && u.Password == Input.Password);
 
             if (user != null)
             {
