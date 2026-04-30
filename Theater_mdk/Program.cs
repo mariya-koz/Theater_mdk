@@ -31,7 +31,7 @@ if (!app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.UseHttpsRedirection();
-app.UseRouting();
+app.UseRouting(); 
 
 app.UseAuthentication();// порядок важен
 app.UseAuthorization(); // внимание эта после UseAuthentication
