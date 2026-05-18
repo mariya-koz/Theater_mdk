@@ -12,8 +12,8 @@ using Theater_mdk.Data;
 namespace Theater_mdk.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260427061338_Theater_mdk")]
-    partial class Theater_mdk
+    [Migration("20260518053550_theater_mdk")]
+    partial class theater_mdk
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -70,6 +70,9 @@ namespace Theater_mdk.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("ImageId")
+                        .HasColumnType("int");
+
                     b.Property<string>("Name")
                         .HasColumnType("nvarchar(max)");
 
@@ -83,7 +86,34 @@ namespace Theater_mdk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("AuthUser");
+                    b.HasIndex("ImageId");
+
+                    b.ToTable("AuthUsers");
+                });
+
+            modelBuilder.Entity("Theater_mdk.Models.AuthApp.Image", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("ContentType")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("ImageData")
+                        .IsRequired()
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Theater_mdk.Models.Ticket", b =>
@@ -113,6 +143,15 @@ namespace Theater_mdk.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Ticket");
+                });
+
+            modelBuilder.Entity("Theater_mdk.Models.AuthApp.AuthUser", b =>
+                {
+                    b.HasOne("Theater_mdk.Models.AuthApp.Image", "Image")
+                        .WithMany()
+                        .HasForeignKey("ImageId");
+
+                    b.Navigation("Image");
                 });
 #pragma warning restore 612, 618
         }

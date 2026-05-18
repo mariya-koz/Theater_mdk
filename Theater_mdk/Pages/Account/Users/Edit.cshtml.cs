@@ -21,6 +21,9 @@ namespace Theater_mdk.Pages.Account.Users
         [BindProperty]
         public AuthUser User { get; set; }
 
+        [BindProperty]
+        public IFormFile? ImageFile { get; set; }
+
         public async Task<IActionResult> OnGetAsync(int id)
         {
             User = await _context.AuthUsers.FindAsync(id);
@@ -29,8 +32,22 @@ namespace Theater_mdk.Pages.Account.Users
                 return NotFound();
 
             return Page();
-        }
 
+            if (ImageFile != null)
+            {
+                if (ImageFile.Length > 2 * 1024 * 1024) // проверка на размер фала
+                {
+                    ModelState.AddModelError("", "File too large");
+                    return Page();
+                }
+
+                using (var ms = new MemoryStream())
+                {
+                    await ImageFile.CopyToAsync(ms);
+                    User.Image = ms.ToArray();
+                }
+            }
+        }
         public async Task<IActionResult> OnPostAsync()
         {
             if (!ModelState.IsValid)
