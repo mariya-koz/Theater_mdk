@@ -25,6 +25,16 @@
                             @user.Email
                         </h5>
 
+                        <h5 class="card-title mb-3">
+                            @if (@user.Image != null)
+                            {
+                                <div class="mb-3">
+                                    <img style="max-width:150px;"
+                                         src="data:image/png;base64,@Convert.ToBase64String(@user.Image)" />
+                                </div>
+                            }
+                        </h5>
+
                         <p class="card-text">
                             Role:
                             <span class="badge bg-secondary">

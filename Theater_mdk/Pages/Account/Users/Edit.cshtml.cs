@@ -32,6 +32,11 @@ namespace Theater_mdk.Pages.Account.Users
                 return NotFound();
 
             return Page();
+        }
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (!ModelState.IsValid)
+                return Page();
 
             if (ImageFile != null)
             {
@@ -47,13 +52,8 @@ namespace Theater_mdk.Pages.Account.Users
                     User.Image = ms.ToArray();
                 }
             }
-        }
-        public async Task<IActionResult> OnPostAsync()
-        {
-            if (!ModelState.IsValid)
-                return Page();
 
-            _context.Attach(User).State = EntityState.Modified;
+                _context.Attach(User).State = EntityState.Modified;
 
             await _context.SaveChangesAsync();
 

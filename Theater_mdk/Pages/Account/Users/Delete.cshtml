@@ -12,6 +12,15 @@
 
     <ul class="list-group mb-3">
         <li class="list-group-item">
+            @if (Model.User.Image != null)
+            {
+                <div class="mb-3">
+                    <img style="max-width:150px;"
+                         src="data:image/png;base64,@Convert.ToBase64String(Model.User.Image)" />
+                </div>
+            }
+        </li>
+        <li class="list-group-item">
             <b>Email:</b> @Model.User.Email
         </li>
         <li class="list-group-item">
@@ -34,3 +43,4 @@
     </form>
 
 </div>
+

@@ -12,8 +12,8 @@ using Theater_mdk.Data;
 namespace Theater_mdk.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260518055719_theater")]
-    partial class theater
+    [Migration("20260523053344_theater_mdk_db")]
+    partial class theater_mdk_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
