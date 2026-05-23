@@ -31,7 +31,6 @@ namespace Theater_mdk.Pages.Account.Users
             if (!ModelState.IsValid)
                 return Page();
 
-            // Обработка файла (оставляем как есть)
             if (ImageFile != null)
             {
                 if (ImageFile.Length > 2 * 1024 * 1024)
@@ -46,15 +45,12 @@ namespace Theater_mdk.Pages.Account.Users
                     User.Image = ms.ToArray();
                 }
             }
-            if (User.Id > 0) // если сущность уже существует (редкий случай для Create)
+            if (User.Id > 0) 
             {
                 _context.Attach(User).State = EntityState.Modified;
             }
             else
             {
-                // Хэширование пароля, если не реализовано в модели
-                // User.Password = PasswordHasher.Hash(User.Password);
-
                 await _context.AuthUsers.AddAsync(User);
             }
 
