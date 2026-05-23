@@ -6,7 +6,7 @@
 
     <h2>Create User</h2>
 
-    <form method="post">
+    <form method="post" enctype="multipart/form-data">
 
         <div class="mb-3">
             <label asp-for="User.Email" class="form-label"></label>
@@ -27,9 +27,8 @@
 
         <div class="mb-3">
             <label asp-for="User.Image" class="form-label"></label>
-            <input asp-for="User.Image" class="form-control" />
+            <input asp-for="User.Image" type="file" name="ImageFile" class="form-control" />
         </div>
-
 
         <button type="submit" class="btn btn-success">
             Create

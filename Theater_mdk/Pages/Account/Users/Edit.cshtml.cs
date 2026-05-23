@@ -8,7 +8,6 @@ using Theater_mdk.Models.AuthApp;
 namespace Theater_mdk.Pages.Account.Users
 {
     [Authorize(Roles = "Admin")]
-
     public class EditModel : PageModel
     {
         private readonly ApplicationDBContext _context;
