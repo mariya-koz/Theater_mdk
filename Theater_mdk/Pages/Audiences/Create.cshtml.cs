@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Theater_mdk.Data;
@@ -7,6 +6,7 @@ using Theater_mdk.Models;
 
 namespace Theater_mdk.Pages.Audiences
 {
+    [Authorize]
     public class CreateModel : PageModel
     {
         private readonly ApplicationDBContext _context;

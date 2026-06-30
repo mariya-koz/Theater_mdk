@@ -6,6 +6,7 @@ using Theater_mdk.Models;
 
 namespace Theater_mdk.Pages.Audiences
 {
+    [Authorize(Roles = "Admin")]
     public class DeleteModel : PageModel
     {
         private readonly ApplicationDBContext _context;

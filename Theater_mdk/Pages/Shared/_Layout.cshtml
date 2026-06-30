@@ -1,4 +1,15 @@
 ﻿﻿@using System.Security.Claims
+@*++ авторизация*@
+@inject IHttpContextAccessor HttpContextAccessor
+@{
+    var user = HttpContextAccessor.HttpContext?.User;
+    var isAuthenticated = user?.Identity?.IsAuthenticated ?? false;
+    var userName = user?.Identity?.Name ?? "";
+    var isAdmin = user?.IsInRole("Admin") ?? false;
+    var userId = user?.FindFirst(ClaimTypes.NameIdentifier)?.Value;
+}
+@*-- авторизация*@
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -31,6 +42,45 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/Audiences/Index">Зрители</a>
                         </li>
                     </ul>
+
+                        @if (isAdmin)
+                        {
+                            <li>
+                                <a class="nav-link text-dark" asp-page="/Account/Users/Index">Пользователи</a>
+                            </li>
+                        }
+
+                    <ul class="navbar-nav ms-auto">
+                        @if (!isAuthenticated)
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Login">Войти</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-page="/Account/Registr">Регистрация</a>
+                            </li>
+                        }
+                        else
+                        {
+                            <li class="nav-item dropdown">
+                                <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown">
+                                    👤 @userName 
+                                </a>
+                                <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="userDropdown">
+                                    <li>
+                                        <a class="dropdown-item" asp-page="/Account/Logout">Выход</a>
+                                    </li>
+                                </ul>
+                            </li>
+                        }
+
+                        @*+++ темная тема*@
+                        <li class="nav-item">
+                            <button class="btn btn-outline-secondary" onclick="toggleTheme()">🌓 Переключить тему</button>
+                        </li>
+                        @*--- темная тема*@
+
+                    </ul>
                 </div>
             </div>
         </nav>
@@ -54,3 +104,31 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>
+
+
+<script>
+    (function() {
+        const html = document.documentElement;
+        const storedTheme = localStorage.getItem('theme');   // 1. Читаем сохранённую тему
+
+        function setTheme(theme) {                           // 2. Функция установки темы + сохранение
+            html.setAttribute('data-bs-theme', theme);
+            localStorage.setItem('theme', theme);
+        }
+
+        if (storedTheme) {
+            setTheme(storedTheme);                           // 3. Если есть сохранённая – используем её
+        } else {
+            // 4. Иначе определяем по системе (один раз, без подписки на изменения)
+            const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+            setTheme(prefersDark ? "dark" : "light");
+        }
+
+        // 5. Глобальная функция для кнопки – переключает и сохраняет
+        window.toggleTheme = function() {
+            const currentTheme = html.getAttribute('data-bs-theme');
+            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+            setTheme(newTheme);
+        };
+    })();
+</script>

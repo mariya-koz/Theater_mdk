@@ -1,6 +1,8 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using Theater_mdk.Models;
+using Theater_mdk.Models.AuthApp;
 
 namespace Theater_mdk.Data
 {
@@ -14,6 +16,7 @@ namespace Theater_mdk.Data
 
         public DbSet<Ticket> Ticket { get; set; }
         public DbSet<Audience> Audiences { get; set; }
+        public DbSet<AuthUser> AuthUsers { get; set; }
 
     }
 }

@@ -1,0 +1,40 @@
+﻿@page
+@model Theater_mdk.Pages.Account.Users.DetailsModel
+@{
+}
+<div class="container mt-4">
+
+    <h2>User Details</h2>
+
+    <div class="card">
+
+        <div class="card-body">
+            <p>
+                @if (Model.User.Image != null)
+                {
+                    <div class="mb-3">
+                        <img style="max-width:150px;"
+                             src="data:image/png;base64,@Convert.ToBase64String(Model.User.Image)" />
+                    </div>
+                }
+            </p>
+            <p><b>Email:</b> @Model.User.Email</p>
+            <p><b>Role:</b> @Model.User.Role</p>
+
+        </div>
+
+    </div>
+
+    <br>
+
+    <a asp-page="Edit" asp-route-id="@Model.User.Id"
+       class="btn btn-warning">
+        Edit
+    </a>
+
+    <a asp-page="Index" class="btn btn-secondary">
+        Back
+    </a>
+
+</div>
+

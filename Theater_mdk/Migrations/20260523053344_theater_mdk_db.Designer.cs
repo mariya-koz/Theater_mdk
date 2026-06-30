@@ -12,8 +12,8 @@ using Theater_mdk.Data;
 namespace Theater_mdk.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20260323055038_initialcreate")]
-    partial class initialcreate
+    [Migration("20260523053344_theater_mdk_db")]
+    partial class theater_mdk_db
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -55,7 +55,39 @@ namespace Theater_mdk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Students");
+                    b.ToTable("Audiences");
+                });
+
+            modelBuilder.Entity("Theater_mdk.Models.AuthApp.AuthUser", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<byte[]>("Image")
+                        .HasColumnType("varbinary(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Role")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuthUsers");
                 });
 
             modelBuilder.Entity("Theater_mdk.Models.Ticket", b =>
@@ -84,7 +116,7 @@ namespace Theater_mdk.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("Books");
+                    b.ToTable("Ticket");
                 });
 #pragma warning restore 612, 618
         }

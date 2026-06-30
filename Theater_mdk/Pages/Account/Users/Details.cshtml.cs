@@ -1,17 +1,14 @@
-﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Theater_mdk.Data;
-using Theater_mdk.Models;
+using Theater_mdk.Models.AuthApp;
 
-namespace Theater_mdk.Pages.Audiences
+namespace Theater_mdk.Pages.Account.Users
 {
-    [Authorize]
+    [Authorize(Roles = "Admin")]
+
     public class DetailsModel : PageModel
     {
         private readonly ApplicationDBContext _context;
@@ -21,13 +18,13 @@ namespace Theater_mdk.Pages.Audiences
             _context = context;
         }
 
-        public Audience Audience { get; set; }
+        public AuthUser User { get; set; }
 
-        public IActionResult OnGet(int id)
+        public async Task<IActionResult> OnGetAsync(int id)
         {
-            Audience = _context.Audiences.FirstOrDefault(s => s.Id == id);
+            User = await _context.AuthUsers.FindAsync(id);
 
-            if (Audience == null)
+            if (User == null)
                 return NotFound();
 
             return Page();
